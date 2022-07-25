@@ -1,18 +1,12 @@
 <?php
-/**
- * 阿里图床上传
- * @author: 网科阁 (QQ群：832737417)
- * @link: https://wangkege.com
- * @version: 1.2
- * 2022.4.9 xsap修复使用.
- */
+
 $file = $_FILES['file'];
 if (is_uploaded_file($file['tmp_name'])){
 	$arr = pathinfo($file['name']);
 	$ext_suffix = $arr['extension'];
 	$allow_suffix = array('jpg','gif','jpeg','png');
 	if(!in_array($ext_suffix, $allow_suffix)){
-		msg(['code'=> 1,'msg'=> '上传格式不支持']);
+		msg(['code'=> 1,'msg'=> '当前格式不支持']);
 	}
 	$new_filename = time().rand(100,1000).'.'.$ext_suffix;
 	if (move_uploaded_file($file['tmp_name'], $new_filename)){
@@ -61,7 +55,7 @@ function upload($file_path)
     if ($json['code'] == '0') {
         msg(['code'=> 0,'msg'=> $json['url']]);
     }else{
-        msg(['code'=> 1,'msg'=> '上传失败,阿里图床不稳定，多上传几次。']);
+        msg(['code'=> 1,'msg'=> '上传失败']);
     }
     return ;
 }
